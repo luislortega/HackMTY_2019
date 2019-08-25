@@ -104,7 +104,7 @@ class HomePageState extends State<HomePage> {
   fetchData() async {
     http.Response response = await http.get(
         //Uri.encodeFull removes all the dashes or extra characters present in our Uri
-        Uri.encodeFull("http://10.22.156.184:8080/acopios"),
+        Uri.encodeFull("http://10.22.156.184:8081/acopios"),
         headers: {
           //if your api require key then pass your key here as well e.g "key": "my-long-key"
           "Accept": "application/json"
