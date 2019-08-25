@@ -14,7 +14,7 @@ var request = require('request');
 var url =
   'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=25.677604,%20-100.309500&radius=20000&keyword=proteccion%civil&key=AIzaSyDIfjfmb_wrxG5ZH4ym4h9Ea0Q8XCKnOhQ';
 
-app.get('/acopios/:latlong', (req, res) => {
+app.get('/acopios', (req, res) => {
     request(
         {
             url: url,
@@ -30,10 +30,10 @@ app.get('/acopios/:latlong', (req, res) => {
     );
 });
 
-app.listen(8080, err => {
+app.listen(8081, err => {
   if (err) {
     console.log(`Error: ${err}`);
   } else {
-    console.log(`🚀 BACKEND RUNNING AT PORT 8080`);
+    console.log(`🚀 BACKEND RUNNING AT PORT 8081`);
   }
 });
