@@ -154,52 +154,10 @@ class _Login extends State<Login> {
                   ],
                 ),
               ),
-              TextFormField(
-                controller: emailController,
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Por favor, ingresa tu correo';
-                  }
-                },
-              ),
-              TextFormField(
-                controller: passwordController,
-                obscureText: true,
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Por favor, ingresa tu contraseña';
-                  }
-                },
-              ),
               Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16.0),
                   child: Column(
-                    children: <Widget>[
-                      RaisedButton(
-                        onPressed: () {
-                          // Validate returns true if the form is valid, or false
-                          // otherwise.
-                          if (_formKey.currentState.validate()) {
-                            //_showDialog(emailController.text);
-                            _login(
-                                emailController.text, passwordController.text);
-                          }
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => DonationData()));
-                        },
-                        child: Text('Login'),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(20.0)),
-                      ),
-                      RaisedButton(
-                        onPressed: null,
-                        child: Text("Regístrate con facebook"),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(20.0)),
-                      )
-                    ],
+                    children: <Widget>[],
                   )),
             ],
           ),
