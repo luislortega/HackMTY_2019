@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:frontend/listPlaces.dart';
+import './ui/donationData.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -57,7 +58,10 @@ class HomePageState extends State<HomePage> {
               Expanded(child: SizedBox()),
               FlatButton(
                 padding: EdgeInsets.fromLTRB(0, 0, 30, 20),
-                onPressed: () => {},
+                onPressed: () => {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => DonationData()))
+                },
                 child: Text("¿Qué donar?",
                     style: TextStyle(fontSize: 20, color: Colors.orange)),
               ),
