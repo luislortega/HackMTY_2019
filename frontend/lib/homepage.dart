@@ -4,8 +4,12 @@ import 'dart:convert'; //it allows us to convert our json to a list
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:frontend/listPlaces.dart';
+<<<<<<< HEAD
 import 'package:http/http.dart' as http;
 import 'package:frontend/ui/login.dart';
+=======
+import './ui/donationData.dart';
+>>>>>>> cea6a9a7d2f112280bb074059ac16a8204b1d5fe
 
 class HomePage extends StatefulWidget {
   @override
@@ -58,7 +62,19 @@ class HomePageState extends State<HomePage> {
               Expanded(child: SizedBox()),
               FlatButton(
                 padding: EdgeInsets.fromLTRB(0, 0, 30, 20),
-                onPressed: () => {fetchData()},
+                // 
+
+                //ESTA FUNCION HACE QUE OBTENGA LOS MARCADORES DEL API
+                
+                //onPressed: () => {fetchData()},
+
+                //
+
+                onPressed: () => {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => DonationData()))
+                },
+
                 child: Text("¿Qué donar?",
                     style: TextStyle(fontSize: 20, color: Colors.orange)),
               ),
