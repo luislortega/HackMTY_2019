@@ -123,7 +123,13 @@ class HomePageState extends State<HomePage> {
         markerId: markerId,
         position: LatLng(double.tryParse(datos['geometry']['location']['lat'].toString()), double.tryParse(datos['geometry']['location']['lng'].toString())),
         infoWindow: InfoWindow(title: datos['name'].toString(), snippet: '*'),
-        
+        onTap: () {
+          // DATOS LIMPIOS
+          String nombre = datos['name'].toString();
+          double latitud = double.tryParse(datos['geometry']['location']['lat'].toString());
+          double longitud = double.tryParse(datos['geometry']['location']['lng'].toString());
+   
+        },
       );
 
       setState(() {
