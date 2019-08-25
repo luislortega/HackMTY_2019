@@ -1,7 +1,12 @@
 import 'dart:async';
+import 'dart:convert'; //it allows us to convert our json to a list
+
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:frontend/listPlaces.dart';
+import 'package:http/http.dart' as http;
+import 'package:frontend/ui/login.dart';
+
 import './ui/donationData.dart';
 
 class HomePage extends StatefulWidget {
@@ -11,11 +16,8 @@ class HomePage extends StatefulWidget {
 
 class HomePageState extends State<HomePage> {
   Completer<GoogleMapController> _controller = Completer();
-
-  @override
-  void initState() {
-    super.initState();
-  }
+  List list = List();
+  var isLoading = false;
 
   double zoomVal = 5.0;
 
@@ -58,10 +60,19 @@ class HomePageState extends State<HomePage> {
               Expanded(child: SizedBox()),
               FlatButton(
                 padding: EdgeInsets.fromLTRB(0, 0, 30, 20),
+                // 
+
+                //ESTA FUNCION HACE QUE OBTENGA LOS MARCADORES DEL API
+                
+                //onPressed: () => {fetchData()},
+
+                //
+
                 onPressed: () => {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => DonationData()))
                 },
+
                 child: Text("¿Qué donar?",
                     style: TextStyle(fontSize: 20, color: Colors.orange)),
               ),
@@ -71,6 +82,9 @@ class HomePageState extends State<HomePage> {
       ),
     ));
   }
+
+  Map<MarkerId, Marker> markers =
+      <MarkerId, Marker>{}; // CLASS MEMBER, MAP OF MARKS
 
   Widget _googlemap(BuildContext context) {
     return Container(
@@ -82,9 +96,42 @@ class HomePageState extends State<HomePage> {
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
         },
-        markers: {newyorkMarker, newyorkMarker2},
+        markers: Set<Marker>.of(markers.values),
       ),
     );
+  }
+
+  fetchData() async {
+    http.Response response = await http.get(
+        //Uri.encodeFull removes all the dashes or extra characters present in our Uri
+        Uri.encodeFull("http://10.22.156.184:8080/acopios"),
+        headers: {
+          //if your api require key then pass your key here as well e.g "key": "my-long-key"
+          "Accept": "application/json"
+        });
+    //print(response.body);
+    List data = json.decode(response.body) as List;
+
+    data.map((datos) {
+      print(datos['geometry']['location']);
+      
+      var markerIdVal = datos['geometry']['location'].toString();
+      final MarkerId markerId = MarkerId(markerIdVal);
+
+      // creating a new MARKER
+      final Marker marker = Marker(
+        markerId: markerId,
+        position: LatLng(double.tryParse(datos['geometry']['location']['lat'].toString()), double.tryParse(datos['geometry']['location']['lng'].toString())),
+        infoWindow: InfoWindow(title: datos['name'].toString(), snippet: '*'),
+        
+      );
+
+      setState(() {
+        // adding a new marker to map
+        markers[markerId] = marker;
+      });
+
+    }).toList();
   }
 }
 
