@@ -2,6 +2,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:frontend/model/note.dart';
+import 'package:frontend/homepage.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -92,12 +93,12 @@ class _Login extends State<Login> {
                             height: 50,
                             child: RaisedButton(
                             onPressed: () {
-                          // Validate returns true if the form is valid, or false
-                          // otherwise.
+
                           if (_formKey.currentState.validate()) {
-                            //_showDialog(emailController.text);
-                            _login(
-                                emailController.text, passwordController.text);
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+                            
+                            //_login(
+                               // emailController.text, passwordController.text);
                           }
                         },
                         color: Colors.white,
