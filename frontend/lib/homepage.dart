@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert'; //it allows us to convert our json to a list
 
 import 'package:flutter/material.dart';
+import 'package:frontend/ui/listAcopios.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:frontend/listPlaces.dart';
 import 'package:http/http.dart' as http;
@@ -34,7 +35,7 @@ class HomePageState extends State<HomePage> {
               FlatButton(
                 onPressed: () => {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => ListPlaces()))
+                      MaterialPageRoute(builder: (context) => ListAcopios()))
                 },
                 padding: EdgeInsets.all(10.0),
                 child: Column(
@@ -53,17 +54,19 @@ class HomePageState extends State<HomePage> {
             ],
           ),
           Expanded(
-            child: SizedBox(),
+            child: FlatButton(
+              onPressed: fetchData(),
+            ),
           ),
           Row(
             children: <Widget>[
               Expanded(child: SizedBox()),
               FlatButton(
                 padding: EdgeInsets.fromLTRB(0, 0, 30, 20),
-                // 
+                //
 
                 //ESTA FUNCION HACE QUE OBTENGA LOS MARCADORES DEL API
-                
+
                 //onPressed: () => {fetchData()},
 
                 //
@@ -114,21 +117,24 @@ class HomePageState extends State<HomePage> {
 
     data.map((datos) {
       print(datos['geometry']['location']);
-      
+
       var markerIdVal = datos['geometry']['location'].toString();
       final MarkerId markerId = MarkerId(markerIdVal);
 
       // creating a new MARKER
       final Marker marker = Marker(
         markerId: markerId,
-        position: LatLng(double.tryParse(datos['geometry']['location']['lat'].toString()), double.tryParse(datos['geometry']['location']['lng'].toString())),
+        position: LatLng(
+            double.tryParse(datos['geometry']['location']['lat'].toString()),
+            double.tryParse(datos['geometry']['location']['lng'].toString())),
         infoWindow: InfoWindow(title: datos['name'].toString(), snippet: '*'),
         onTap: () {
           // DATOS LIMPIOS
           String nombre = datos['name'].toString();
-          double latitud = double.tryParse(datos['geometry']['location']['lat'].toString());
-          double longitud = double.tryParse(datos['geometry']['location']['lng'].toString());
-   
+          double latitud =
+              double.tryParse(datos['geometry']['location']['lat'].toString());
+          double longitud =
+              double.tryParse(datos['geometry']['location']['lng'].toString());
         },
       );
 
@@ -136,7 +142,6 @@ class HomePageState extends State<HomePage> {
         // adding a new marker to map
         markers[markerId] = marker;
       });
-
     }).toList();
   }
 }

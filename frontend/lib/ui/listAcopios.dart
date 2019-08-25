@@ -37,11 +37,9 @@ class SwipeList extends StatefulWidget {
 }
 
 class ListItemWidget extends State<SwipeList> {
-
   Future<List<Acopio>> _getItems() async {
     //This isn't a safety option to send params.
-    String url =
-        'http://10.22.156.184:8081/acopios';
+    String url = 'http://10.22.156.184:8081/acopios';
 
     http.Response itemData = await http
         .get(Uri.encodeFull(url), headers: {"Accept": "application/json"});
@@ -54,14 +52,17 @@ class ListItemWidget extends State<SwipeList> {
     int j = 0;
     List<Acopio> items = [];
     for (var i in jsonData) {
-      Acopio acopio = Acopio(double.tryParse(jsonData[j]['geometry']['lat'].toString()),  double.tryParse(jsonData[j]['geometry']['lng'].toString()), jsonData[j]['name'].toString());
+      Acopio acopio = Acopio(
+          double.tryParse(jsonData[j]['geometry']['lat'].toString()),
+          double.tryParse(jsonData[j]['geometry']['lng'].toString()),
+          jsonData[j]['name'].toString());
       j++;
       items.add(acopio);
     }
     return items;
   }
 
-@override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
@@ -91,27 +92,29 @@ class ListItemWidget extends State<SwipeList> {
                         shrinkWrap: true,
                         itemCount: snapshot.data.length,
                         itemBuilder: (BuildContext context, int index) {
-                           //Text(snapshot.data[index].nombre); 
+                          //Text(snapshot.data[index].nombre);
                           return ListTile(
-      title: Text(snapshot.data[index].nombre),
-      contentPadding: EdgeInsets.only(bottom: 10, right: 10),
-      trailing: Text(
-        snapshot.data[index].nombre,
-        style: TextStyle(color: Color(0xff49FE5B), fontSize: 15),
-      ),
-      leading: InkWell(
-        child: new Container(
-          height: 45,
-          child: Image.network(
-            "https://d1dxvryen9goi5.cloudfront.net/wp-content/uploads/2019/05/mapa-mexico.jpg",
-            fit: BoxFit.cover,
-            width: 50,
-            height: 50,
-          ),
-        ),
-      ),
-      subtitle: Text(snapshot.data[index].nombre),
-    );
+                            title: Text(snapshot.data[index].nombre),
+                            contentPadding:
+                                EdgeInsets.only(bottom: 10, right: 10),
+                            trailing: Text(
+                              snapshot.data[index].nombre,
+                              style: TextStyle(
+                                  color: Color(0xff49FE5B), fontSize: 15),
+                            ),
+                            leading: InkWell(
+                              child: new Container(
+                                height: 45,
+                                child: Image.network(
+                                  "https://d1dxvryen9goi5.cloudfront.net/wp-content/uploads/2019/05/mapa-mexico.jpg",
+                                  fit: BoxFit.cover,
+                                  width: 50,
+                                  height: 50,
+                                ),
+                              ),
+                            ),
+                            subtitle: Text(snapshot.data[index].nombre),
+                          );
                         }),
                   );
                 },
@@ -122,12 +125,9 @@ class ListItemWidget extends State<SwipeList> {
       ),
     );
   }
-  }
+}
 
-  
-
-
-class Acopio{
+class Acopio {
   double lat;
   double lng;
   String nombre;
