@@ -30,6 +30,7 @@ class _Login extends State<Login> {
     return MaterialApp(
       title: 'login_page',
       home: Scaffold(
+        backgroundColor: Colors.white,
           body: Column(
             children: <Widget>[
               Form(
@@ -37,20 +38,37 @@ class _Login extends State<Login> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text("Terremex",
-                    style: TextStyle(fontSize: 36, color: Color(0xFF8F5100))
+                    Container(
+                      margin:EdgeInsets.only(top: 30, left: 30),
+                      child: Text("Terremex",
+                    style: TextStyle(fontSize: 38, color: Colors.orange)
                     ),
-                    Text("Bienvenido de nuevo, ingresa para ver como colaborar en apoyo a tu comunidad",
-                    style: TextStyle(fontSize: 28, color: Color(0x70707000)),),
-                    TextFormField(
+                    ),
+                    Container(
+                      width: 350,
+                      margin:EdgeInsets.only(top: 30, left: 30),
+                     child: Text("Bienvenido de nuevo, ingresa para ver como colaborar en apoyo a tu comunidad",
+                    style: TextStyle(fontSize: 26, color: Colors.grey),),
+                    ),
+                     Container(
+                       width: 350,
+                       margin:EdgeInsets.only(top: 30, left: 30),
+                      child: TextFormField(
                       controller: emailController,
                       validator: (value) {
                         if (value.isEmpty) {
                           return 'Por favor, ingresa tu correo';
                         }
                       },
+                      decoration: InputDecoration(
+                        hintText: "Correo"
+                      ),
                     ),
-                    TextFormField(
+                    ),
+                    Container(
+                      width: 350,
+                      margin:EdgeInsets.only(top: 30, left: 30),
+                      child: TextFormField(
                       controller: passwordController,
                       obscureText: true,
                       validator: (value) {
@@ -58,13 +76,22 @@ class _Login extends State<Login> {
                           return 'Por favor, ingresa tu contraseña';
                         }
                       },
+                      decoration: InputDecoration(
+                        hintText: "Contraseña"
+                      ),
+                    ),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       child: Column(
                         children: <Widget>[
-                          RaisedButton(
-                        onPressed: () {
+                          Container(
+                            margin:EdgeInsets.only(top: 30, left: 30),
+                            child: ButtonTheme(
+                            minWidth: 350,
+                            height: 50,
+                            child: RaisedButton(
+                            onPressed: () {
                           // Validate returns true if the form is valid, or false
                           // otherwise.
                           if (_formKey.currentState.validate()) {
@@ -73,14 +100,49 @@ class _Login extends State<Login> {
                                 emailController.text, passwordController.text);
                           }
                         },
-                        child: Text('Login'),
-                        shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(20.0)),
+                        color: Colors.white,
+                        textColor: Colors.orange,
+                        child: Text('Iniciar sesión', 
+                        style: TextStyle(fontSize: 16),),
+                        shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(20.0),
+                        side: BorderSide(color: Colors.orange)),
                       ),
-                      RaisedButton(
-                        onPressed: null,
-                        child: Text("Regístrate con facebook"),
-                        shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(20.0)),
+                          ),
+                          ),
+                          
+                      Container(
+                        margin:EdgeInsets.only(top: 30, left: 30),
+                        child: ButtonTheme(
+                        minWidth: 350,
+                        height: 50,
+                        child: RaisedButton(
+                        onPressed: (){
+                        },
+                        color: Colors.white,
+                        textColor: Colors.blue,
+                        child: Text("Regístrate con facebook", 
+                        style: TextStyle(fontSize: 16),),
+                        shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(20.0),
+                        side: BorderSide(color: Colors.blue)),
+                        
+                      ),
                       )
+                      ),
+                      Container(
+                        margin:EdgeInsets.only(top: 30, left: 30),
+                        child: Text("¿No tienes cuenta aún?",
+                    style: TextStyle(fontSize: 16, color: Colors.grey),),
+                      ),
+                      Container(
+                        margin:EdgeInsets.only(top: 5, left: 30),
+                        child: FlatButton(
+                          child: Text("Regístrate",
+                          style: TextStyle(fontSize: 16)),
+                          onPressed: (){
+                        },
+                        ),
+                      )
+                      
                         ],
                       ) 
                     ),
