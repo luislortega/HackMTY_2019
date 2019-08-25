@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "513378837089",
+    "firebase_url": "https://terremex-ed29f.firebaseio.com",
+    "project_id": "terremex-ed29f",
+    "storage_bucket": "terremex-ed29f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:513378837089:android:40f21386bce81052",
+        "android_client_info": {
+          "package_name": "com.example.frontend"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "513378837089-leqmbjudlkdmamqf10v1vkhh7i0389gl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASuXQZVDGN3qBXWQg_R1Ob9m-j6vt3imo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "513378837089-leqmbjudlkdmamqf10v1vkhh7i0389gl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
