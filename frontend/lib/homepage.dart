@@ -1,8 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:flutter/material.dart';
+import 'package:frontend/listPlaces.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -30,7 +29,10 @@ class HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               FlatButton(
-                onPressed: () => {},
+                onPressed: () => {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ListPlaces()))
+                },
                 padding: EdgeInsets.all(10.0),
                 child: Column(
                   // Replace with a Row for horizontal icon + text

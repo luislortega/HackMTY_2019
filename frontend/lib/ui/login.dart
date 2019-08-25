@@ -2,6 +2,7 @@ import 'package:firebase_database/firebase_database.dart';
 import './donationData.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/model/note.dart';
+import 'package:frontend/homepage.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -28,74 +29,181 @@ class _Login extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'login_page',
-      home: Scaffold(
+        title: 'login_page',
+        home: Scaffold(
+          backgroundColor: Colors.white,
           body: Column(
-        children: <Widget>[
-          Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text("Terremex",
-                    style: TextStyle(fontSize: 36, color: Color(0xFF8F5100))),
-                Text(
-                  "Bienvenido de nuevo, ingresa para ver como colaborar en apoyo a tu comunidad",
-                  style: TextStyle(fontSize: 28, color: Color(0x70707000)),
+            children: <Widget>[
+              Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Container(
+                      margin: EdgeInsets.only(top: 30, left: 30),
+                      child: Text("Terremex",
+                          style: TextStyle(fontSize: 38, color: Colors.orange)),
+                    ),
+                    Container(
+                      width: 350,
+                      margin: EdgeInsets.only(top: 30, left: 30),
+                      child: Text(
+                        "Bienvenido de nuevo, ingresa para ver como colaborar en apoyo a tu comunidad",
+                        style: TextStyle(fontSize: 26, color: Colors.grey),
+                      ),
+                    ),
+                    Container(
+                      width: 350,
+                      margin: EdgeInsets.only(top: 30, left: 30),
+                      child: TextFormField(
+                        controller: emailController,
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Por favor, ingresa tu correo';
+                          }
+                        },
+                        decoration: InputDecoration(hintText: "Correo"),
+                      ),
+                    ),
+                    Container(
+                      width: 350,
+                      margin: EdgeInsets.only(top: 30, left: 30),
+                      child: TextFormField(
+                        controller: passwordController,
+                        obscureText: true,
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Por favor, ingresa tu contraseña';
+                          }
+                        },
+                        decoration: InputDecoration(hintText: "Contraseña"),
+                      ),
+                    ),
+                    Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 16.0),
+                        child: Column(
+                          children: <Widget>[
+                            Container(
+                              margin: EdgeInsets.only(top: 30, left: 30),
+                              child: ButtonTheme(
+                                minWidth: 350,
+                                height: 50,
+                                child: RaisedButton(
+                                  onPressed: () {
+                                    if (_formKey.currentState.validate()) {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  HomePage()));
+
+                                      //_login(
+                                      // emailController.text, passwordController.text);
+                                    }
+                                  },
+                                  color: Colors.white,
+                                  textColor: Colors.orange,
+                                  child: Text(
+                                    'Iniciar sesión',
+                                    style: TextStyle(fontSize: 16),
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          new BorderRadius.circular(20.0),
+                                      side: BorderSide(color: Colors.orange)),
+                                ),
+                              ),
+                            ),
+                            Container(
+                                margin: EdgeInsets.only(top: 30, left: 30),
+                                child: ButtonTheme(
+                                  minWidth: 350,
+                                  height: 50,
+                                  child: RaisedButton(
+                                    onPressed: () {},
+                                    color: Colors.white,
+                                    textColor: Colors.blue,
+                                    child: Text(
+                                      "Regístrate con facebook",
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            new BorderRadius.circular(20.0),
+                                        side: BorderSide(color: Colors.blue)),
+                                  ),
+                                )),
+                            Container(
+                              margin: EdgeInsets.only(top: 30, left: 30),
+                              child: Text(
+                                "¿No tienes cuenta aún?",
+                                style:
+                                    TextStyle(fontSize: 16, color: Colors.grey),
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(top: 5, left: 30),
+                              child: FlatButton(
+                                child: Text("Regístrate",
+                                    style: TextStyle(fontSize: 16)),
+                                onPressed: () {},
+                              ),
+                            )
+                          ],
+                        )),
+                  ],
                 ),
-                TextFormField(
-                  controller: emailController,
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'Por favor, ingresa tu correo';
-                    }
-                  },
-                ),
-                TextFormField(
-                  controller: passwordController,
-                  obscureText: true,
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'Por favor, ingresa tu contraseña';
-                    }
-                  },
-                ),
-                Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 16.0),
-                    child: Column(
-                      children: <Widget>[
-                        RaisedButton(
-                          onPressed: () {
-                            // Validate returns true if the form is valid, or false
-                            // otherwise.
-                            if (_formKey.currentState.validate()) {
-                              //_showDialog(emailController.text);
-                              _login(emailController.text,
-                                  passwordController.text);
-                            }
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => DonationData()));
-                          },
-                          child: Text('Login'),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: new BorderRadius.circular(20.0)),
-                        ),
-                        RaisedButton(
-                          onPressed: null,
-                          child: Text("Regístrate con facebook"),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: new BorderRadius.circular(20.0)),
-                        )
-                      ],
-                    )),
-              ],
-            ),
-          )
-        ],
-      )),
-    );
+              ),
+              TextFormField(
+                controller: emailController,
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return 'Por favor, ingresa tu correo';
+                  }
+                },
+              ),
+              TextFormField(
+                controller: passwordController,
+                obscureText: true,
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return 'Por favor, ingresa tu contraseña';
+                  }
+                },
+              ),
+              Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16.0),
+                  child: Column(
+                    children: <Widget>[
+                      RaisedButton(
+                        onPressed: () {
+                          // Validate returns true if the form is valid, or false
+                          // otherwise.
+                          if (_formKey.currentState.validate()) {
+                            //_showDialog(emailController.text);
+                            _login(
+                                emailController.text, passwordController.text);
+                          }
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => DonationData()));
+                        },
+                        child: Text('Login'),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(20.0)),
+                      ),
+                      RaisedButton(
+                        onPressed: null,
+                        child: Text("Regístrate con facebook"),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(20.0)),
+                      )
+                    ],
+                  )),
+            ],
+          ),
+        ));
   }
 
   // user defined function
