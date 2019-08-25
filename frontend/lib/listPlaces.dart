@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:frontend/widgets/backArrow.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class ListPlaces extends StatefulWidget{
@@ -17,9 +18,8 @@ class ListPlaces extends StatefulWidget{
   Widget build(BuildContext context) {
     // TODO: implement build
     return new Scaffold(
-      
+      body: Arrow(),
     );
   }
 
-  }
-}
+ }
