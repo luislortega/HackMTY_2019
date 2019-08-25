@@ -4,12 +4,10 @@ import 'dart:convert'; //it allows us to convert our json to a list
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:frontend/listPlaces.dart';
-<<<<<<< HEAD
 import 'package:http/http.dart' as http;
 import 'package:frontend/ui/login.dart';
-=======
+
 import './ui/donationData.dart';
->>>>>>> cea6a9a7d2f112280bb074059ac16a8204b1d5fe
 
 class HomePage extends StatefulWidget {
   @override
